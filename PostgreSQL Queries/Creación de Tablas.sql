@@ -1,0 +1,3 @@
+create table pais (id int8 not null, name varchar(255), primary key (id));
+create table usuario (id int8 not null, apellido varchar(255), email varchar(255), estado varchar(255), fecha date, nombre varchar(255), numero_documento int8, observacion varchar(255), telefono int8, tipo_documento varchar(255), id_pais int8, primary key (id));
+alter table if exists usuario add constraint FKi431su34fh1345iup043lcsqu foreign key (id_pais) references pais;

@@ -1,0 +1,166 @@
+<h1 class="display-4 text-info text-center"><strong>Actualizar Usuario</strong></h1>
+<hr>
+<!-- Formulario -->
+<form class="p-5" [formGroup]="userForm" (ngSubmit)="saveFormulario()">
+  <div class="row">
+
+    <!-- nombre -->
+    <div class="col">
+      <div class="form-group">
+        <label>Nombre/s</label>
+        <input formControlName="nombre"
+               [class.is-invalid]="nombreInvalido"
+               type="text"
+               class="form-control">
+        <small
+          *ngIf="nombreInvalido"
+          class="form-text text-danger">El nombre es invalido
+        </small>
+      </div>
+    </div>
+
+    <!-- apellido -->
+    <div class="col">
+      <div class="form-group">
+        <label>Apellidos</label>
+        <input formControlName="apellido"
+               [class.is-invalid]="apellidoInvalido"
+               type="text"
+               class="form-control">
+        <small
+          *ngIf="apellidoInvalido"
+          class="form-text text-danger">El apellido no es valido
+        </small>
+      </div>
+    </div>
+
+    <!-- nacionalidad -->
+    <div class="col">
+      <div class="form-group">
+        <label>Nacionalidad</label>
+        <select formControlName="nacionalidad"
+                [class.is-invalid]="nacionalidadInvalida"
+                class="form-control">
+          <option [ngValue]="pais" *ngFor="let pais of paises;">{{ pais.name}}</option>
+        </select>
+        <small
+          *ngIf="!validPais || nacionalidadInvalida"
+          class="form-text text-danger">Seleccione una nacionalidad
+        </small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- tipo documento si es colombiano -->
+    <div class="col" *ngIf="nacionalidad">
+      <div class="form-group">
+        <label>Tipo de Documento</label>
+        <select formControlName="tipoDocumento"
+                class="form-control">
+          <option value="Cedula de Ciudadania" selected>Cedula de Ciudadanía</option>
+        </select>
+        <small
+          class="form-text text-success">Tipo de documento seleccionado por defecto.
+        </small>
+      </div>
+    </div>
+
+    <!-- tipo documento -->
+    <div class="col" *ngIf="!nacionalidad">
+      <div class="form-group">
+        <label>Tipo de Documento</label>
+        <select formControlName="tipoDocumento"
+                [class.is-invalid]="tipoDocumentoInvalido"
+                class="form-control">
+          <option *ngFor="let tipo of tipoDocumento">{{ tipo }}</option>
+        </select>
+        <small
+          *ngIf="tipoDocumentoInvalido"
+          class="form-text text-danger">Seleccione un tipo de documento
+        </small>
+      </div>
+    </div>
+
+    <!-- Numero de documento -->
+    <div class="col">
+      <div class="form-group">
+        <label>Numero de Identificación</label>
+        <input formControlName="numeroDocumento"
+               [class.is-invalid]="numeroDocumentoInvalido"
+               type="number"
+               class="form-control">
+
+        <small
+          *ngIf="numeroDocumentoInvalido"
+          class="form-text text-danger">El numero de documento no es valido
+        </small>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- email -->
+    <div class="col">
+      <div class="form-group">
+        <label>Email address</label>
+        <input formControlName="email"
+               [class.is-invalid]="emailInvalido"
+               type="email"
+               class="form-control">
+
+        <small
+          *ngIf="emailInvalido"
+          class="form-text text-danger">El email ingresado no es correcto
+        </small>
+      </div>
+    </div>
+
+    <!-- telefono -->
+    <div class="col">
+      <div class="form-group">
+        <label>Telefono</label>
+        <input formControlName="telefono" type="number" class="form-control">
+      </div>
+    </div>
+
+    <!-- Fecha -->
+    <div class="col">
+      <div class="form-group">
+        <label>Fecha</label>
+        <input formControlName="fecha" type="date" class="form-control" disabled>
+        <small
+          class="form-text text-info">Este campo no se puede modificar
+        </small>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Estado -->
+  <div class="form-group">
+    <label>Estado</label>
+    <input formControlName="estado" class="form-control" disabled
+           [value]="userForm.get('estado').value">
+    <small
+      class="form-text text-info">Este campo no se puede modificar
+    </small>
+  </div>
+
+  <!--Observaciones-->
+  <div class="form-group">
+    <label>Observaciones</label>
+    <textarea formControlName="observacion" class="form-control" rows="3"></textarea>
+  </div>
+
+  <!-- Guardar! -->
+  <button type="submit" class="btn btn-outline-info btn-block">
+    Guardar
+    <i class="far fa-save"></i>
+  </button>
+
+</form>

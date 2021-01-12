@@ -1,0 +1,54 @@
+<div class="table-responsive text-center">
+  <div class="text-left ml-2 mt-1">
+    <h1 class="display-4 text-dark"> <strong>Usuarios del Sistema</strong></h1>
+  <hr>
+  <table
+    datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+    class="table table-bordered table-hover table-sm">
+
+    <thead class="thead-dark">
+    <tr class="text-light">
+      <th>
+        <div class="text-warning">Actualizar</div>
+        <div class="text-danger">Eliminar</div>
+      </th>
+      <th class="align-middle">Nombre</th>
+      <th class="align-middle">Apellido</th>
+      <th class="align-middle">Nacionalidad</th>
+      <th class="align-middle">Tipo Documento</th>
+      <th class="align-middle">Numero Identificación</th>
+      <th class="align-middle">Email</th>
+      <th class="align-middle">Teléfono</th>
+      <th class="align-middle">Observaciones</th>
+      <th class="align-middle">Fecha</th>
+      <th class="align-middle">Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usuarios; let i = index;">
+        <td class="align-middle">
+          <i class="fas fa-edit text-warning action" (click)="editUser(user.id)"></i>
+          <i class="far fa-trash-alt text-danger ml-2 action" (click)="deleteUsuario(user)"></i>
+        </td>
+
+        <td class="align-middle">{{ user.nombre }}</td>
+        <td class="align-middle">{{ user.apellido }}</td>
+        <td class="align-middle">{{ user.nacionalidad.name }}</td>
+        <td class="align-middle">{{ user.tipoDocumento }}</td>
+        <td class="align-middle">{{ user.numeroDocumento }}</td>
+        <td class="align-middle">{{ user.email }}</td>
+        <td class="align-middle">{{ user.telefono }}</td>
+        <td class="align-middle">{{ user.observacion }}</td>
+        <td class="align-middle">{{ user.fecha }}</td>
+        <td class="text-success align-middle" *ngIf="user.estado === 'Activo'">{{
+          user.estado }}</td>
+        <td class="text-danger align-middle" *ngIf="user.estado !== 'Activo'">{{
+          user.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<button class="btn btn-outline-success mt-2 mb-5" routerLink="/crear"> Crear nuevo usuario
+  <i class="fas fa-plus-square"></i>
+</button>
